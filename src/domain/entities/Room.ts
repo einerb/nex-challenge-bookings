@@ -1,14 +1,14 @@
-export class Room {
+import { BaseEntity } from './Base';
+
+export class Room extends BaseEntity {
   constructor(
-    public readonly id: string,
-    public type: RoomType,
-    public view: RoomView,
-    public price: number,
-    public capacity: number,
-    public createdAt: Date,
-    public updatedAt: Date,
-    public deletedAt?: Date | null,
-  ) {}
+    public readonly type: RoomType,
+    public readonly view: RoomView,
+    public readonly price: number,
+    public readonly capacity: number,
+  ) {
+    super();
+  }
 }
 
 export enum RoomType {

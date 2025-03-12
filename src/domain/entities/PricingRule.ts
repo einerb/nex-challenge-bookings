@@ -1,14 +1,14 @@
+import { BaseEntity } from './Base';
 import { RoomType } from './Room';
 
-export class PricingRule {
+export class PricingRule extends BaseEntity {
   constructor(
-    public readonly id: string,
-    public roomType: RoomType,
-    public basePrice: number,
-    public weekendIncrement: number,
-    public createdAt: Date,
-    public updatedAt: Date,
-  ) {}
+    public readonly roomType: RoomType,
+    public readonly basePrice: number,
+    public readonly weekendIncrement: number,
+  ) {
+    super();
+  }
 
   calculateWeekendPrice(): number {
     return this.basePrice * (1 + this.weekendIncrement / 100);

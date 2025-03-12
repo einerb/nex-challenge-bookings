@@ -1,12 +1,13 @@
-export class DiscountRule {
+import { BaseEntity } from './Base';
+
+export class DiscountRule extends BaseEntity {
   constructor(
-    public readonly id: string,
-    public minNights: number,
-    public maxNights: number | null,
-    public discount: number,
-    public createdAt: Date,
-    public updatedAt: Date,
-  ) {}
+    public readonly minNights: number,
+    public readonly maxNights: number | null,
+    public readonly discount: number,
+  ) {
+    super();
+  }
 
   appliesTo(nights: number): boolean {
     return (

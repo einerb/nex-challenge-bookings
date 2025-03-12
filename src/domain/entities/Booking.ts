@@ -1,18 +1,20 @@
-export class Booking {
+import { BaseEntity } from './Base';
+import { Room } from './Room';
+import { User } from './User';
+
+export class Booking extends BaseEntity {
   constructor(
-    public readonly id: string,
-    public roomId: string,
-    public guestId: string,
-    public startDate: Date,
-    public endDate: Date,
-    public totalPrice: number,
-    public isAllInclusive: boolean,
-    public guests: number,
-    public status: BookingStatus,
-    public createdAt: Date,
-    public updatedAt: Date,
-    public deletedAt?: Date | null,
-  ) {}
+    public readonly room: Room,
+    public readonly guest: User,
+    public readonly startDate: Date,
+    public readonly endDate: Date,
+    public readonly totalPrice: number,
+    public readonly isAllInclusive: boolean,
+    public readonly guests: number,
+    public readonly status: BookingStatus,
+  ) {
+    super();
+  }
 
   validateDates(): boolean {
     return this.startDate < this.endDate;
