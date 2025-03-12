@@ -1,0 +1,78 @@
+generator client {
+    provider = "prisma-client-js"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Room {
+    id        String    @id @default(uuid())
+    type      RoomType?
+    view      RoomView?
+    price     Float
+    capacity  Int
+    bookings  Booking[]
+    createdAt DateTime  @default(now()) @map("created_at")
+    updatedAt DateTime  @updatedAt @map("updated_at")
+    deletedAt DateTime? @map("deleted_at")
+}
+
+model Booking {
+    id             String        @id @default(uuid())
+    roomId         String        @map("room_id")
+    guestId        String        @map("guest_id")
+    startDate      DateTime      @map("start_date")
+    endDate        DateTime      @map("end_date")
+    totalPrice     Float         @map("total_price")
+    isAllInclusive Boolean       @map("is_all_inclusive")
+    guests         Int
+    status         StatusBooking @default(PENDING)
+    createdAt      DateTime      @default(now()) @map("created_at")
+    updatedAt      DateTime      @updatedAt @map("updated_at")
+    deletedAt      DateTime?     @map("deleted_at")
+    room           Room          @relation(fields: [roomId], references: [id])
+    guest          User          @relation(fields: [guestId], references: [id])
+}
+
+model User {
+    id        String    @id @default(uuid())
+    name      String
+    email     String    @unique
+    bookings  Booking[]
+    createdAt DateTime  @default(now()) @map("created_at")
+    updatedAt DateTime  @updatedAt @map("updated_at")
+    deletedAt DateTime? @map("deleted_at")
+}
+
+model PricingRule {
+    id               String   @id @default(uuid())
+    roomType         RoomType @map("room_type")
+    basePrice        Int      @map("base_price")
+    weekendIncrement Float    @map("weekend_increment")
+}
+
+model DiscountRule {
+    id        String @id @default(uuid())
+    minNights Int    @map("min_nights")
+    maxNights Int?   @map("max_nights")
+    discount  Int
+}
+
+enum StatusBooking {
+    PENDING
+    CONFIRMED
+    CANCELLED
+}
+
+enum RoomType {
+    SINGLE
+    DOUBLE
+    PRESIDENTIAL
+}
+
+enum RoomView {
+    OUTSIDE
+    INTERIOR
+}
