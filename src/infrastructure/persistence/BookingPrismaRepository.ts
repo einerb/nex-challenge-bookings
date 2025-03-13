@@ -16,7 +16,7 @@ export class BookingPrismaRepository implements BookingRepository {
 
   async findById(id: string): Promise<Booking | null> {
     const booking = await this.prisma.booking.findUnique({
-      where: { id },
+      where: { id, deletedAt: null },
       include: { room: true, guest: true },
     });
 
@@ -25,6 +25,7 @@ export class BookingPrismaRepository implements BookingRepository {
 
   async findAll(): Promise<Booking[]> {
     const bookings = await this.prisma.booking.findMany({
+      where: { deletedAt: null },
       include: { room: true, guest: true },
     });
 
@@ -43,7 +44,10 @@ export class BookingPrismaRepository implements BookingRepository {
   }
 
   async delete(id: string): Promise<void> {
-    await this.prisma.booking.delete({ where: { id } });
+    await this.prisma.booking.update({
+      where: { id },
+      data: { deletedAt: new Date() },
+    });
   }
 
   private mapToDomain(

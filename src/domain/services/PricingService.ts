@@ -11,7 +11,7 @@ export class PricingService {
   ): Promise<number> {
     const pricing = await this.pricingRepo.findByRoomType(roomType);
     if (!pricing)
-      throw new Error('No hay regla de precio para este tipo de habitación');
+      throw new Error('There is no price rule for this type of room!');
 
     let price = pricing.basePrice * nights;
     if (isWeekend) price = pricing.calculateWeekendPrice() * nights;
