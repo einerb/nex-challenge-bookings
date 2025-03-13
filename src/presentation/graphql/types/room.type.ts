@@ -7,6 +7,9 @@ export class Room {
   @Field()
   id!: string;
 
+  @Field()
+  name!: string;
+
   @Field(() => RoomType)
   type!: RoomType;
 

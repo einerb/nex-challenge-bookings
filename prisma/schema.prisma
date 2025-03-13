@@ -9,6 +9,7 @@ datasource db {
 
 model Room {
     id        String    @id @default(uuid())
+    name      String
     type      RoomType?
     view      RoomView?
     price     Float
@@ -17,6 +18,8 @@ model Room {
     createdAt DateTime  @default(now()) @map("created_at")
     updatedAt DateTime  @updatedAt @map("updated_at")
     deletedAt DateTime? @map("deleted_at")
+
+    @@map("rooms")
 }
 
 model Booking {
@@ -34,6 +37,8 @@ model Booking {
     deletedAt      DateTime?     @map("deleted_at")
     room           Room          @relation(fields: [roomId], references: [id])
     guest          User          @relation(fields: [guestId], references: [id])
+
+    @@map("bookings")
 }
 
 model User {
@@ -44,6 +49,8 @@ model User {
     createdAt DateTime  @default(now()) @map("created_at")
     updatedAt DateTime  @updatedAt @map("updated_at")
     deletedAt DateTime? @map("deleted_at")
+
+    @@map("users")
 }
 
 model PricingRule {
@@ -51,6 +58,8 @@ model PricingRule {
     roomType         RoomType @map("room_type")
     basePrice        Int      @map("base_price")
     weekendIncrement Float    @map("weekend_increment")
+
+    @@map("pricing_rules")
 }
 
 model DiscountRule {
@@ -58,6 +67,8 @@ model DiscountRule {
     minNights Int    @map("min_nights")
     maxNights Int?   @map("max_nights")
     discount  Int
+
+    @@map("discount_rules")
 }
 
 enum StatusBooking {
