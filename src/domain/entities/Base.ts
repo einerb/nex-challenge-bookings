@@ -4,8 +4,8 @@ export abstract class BaseEntity {
   public updatedAt: Date;
   public deletedAt: Date | null = null;
 
-  constructor(createdAt?: Date, updatedAt?: Date) {
-    this.id = '';
+  constructor(id: string, createdAt?: Date, updatedAt?: Date) {
+    this.id = id;
     this.createdAt = createdAt || new Date();
     this.updatedAt = updatedAt || this.createdAt;
     this.deletedAt = null;

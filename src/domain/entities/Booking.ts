@@ -4,6 +4,7 @@ import { User } from './User';
 
 export class Booking extends BaseEntity {
   constructor(
+    public readonly id: string,
     public readonly room: Room,
     public readonly guest: User,
     public readonly startDate: Date,
@@ -12,8 +13,15 @@ export class Booking extends BaseEntity {
     public readonly isAllInclusive: boolean,
     public readonly guests: number,
     public readonly status: BookingStatus,
+
+    public readonly numberDays: number,
+    public readonly numberNights: number,
+    public readonly basePrice: number,
+    public readonly totalWeekendIncrement: number,
+    public readonly totalDiscount: number,
+    public readonly totalAllInclusive: number,
   ) {
-    super();
+    super(id);
   }
 
   validateDates(): boolean {
@@ -22,7 +30,6 @@ export class Booking extends BaseEntity {
 }
 
 export enum BookingStatus {
-  PENDING = 'PENDING',
   CONFIRMED = 'CONFIRMED',
   CANCELLED = 'CANCELLED',
 }

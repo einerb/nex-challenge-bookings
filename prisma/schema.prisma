@@ -23,20 +23,26 @@ model Room {
 }
 
 model Booking {
-    id             String        @id @default(uuid())
-    roomId         String        @map("room_id")
-    guestId        String        @map("guest_id")
-    startDate      DateTime      @map("start_date")
-    endDate        DateTime      @map("end_date")
-    totalPrice     Float         @map("total_price")
-    isAllInclusive Boolean       @map("is_all_inclusive")
-    guests         Int
-    status         StatusBooking @default(PENDING)
-    createdAt      DateTime      @default(now()) @map("created_at")
-    updatedAt      DateTime      @updatedAt @map("updated_at")
-    deletedAt      DateTime?     @map("deleted_at")
-    room           Room          @relation(fields: [roomId], references: [id])
-    guest          User          @relation(fields: [guestId], references: [id])
+    id                    String        @id @default(uuid())
+    roomId                String        @map("room_id")
+    guestId               String        @map("guest_id")
+    startDate             DateTime      @map("start_date")
+    endDate               DateTime      @map("end_date")
+    totalPrice            Float         @map("total_price")
+    isAllInclusive        Boolean       @map("is_all_inclusive")
+    guests                Int
+    status                StatusBooking @default(CONFIRMED)
+    numberDays            Int           @map("number_days")
+    numberNights          Int           @map("number_nights")
+    basePrice             Float         @map("base_price")
+    totalWeekendIncrement Float         @map("total_weekend_increment")
+    totalDiscount         Float         @map("total_discount")
+    totalAllInclusive     Float         @map("total_all_inclusive")
+    createdAt             DateTime      @default(now()) @map("created_at")
+    updatedAt             DateTime      @updatedAt @map("updated_at")
+    deletedAt             DateTime?     @map("deleted_at")
+    room                  Room          @relation(fields: [roomId], references: [id])
+    guest                 User          @relation(fields: [guestId], references: [id])
 
     @@map("bookings")
 }
@@ -72,7 +78,6 @@ model DiscountRule {
 }
 
 enum StatusBooking {
-    PENDING
     CONFIRMED
     CANCELLED
 }
