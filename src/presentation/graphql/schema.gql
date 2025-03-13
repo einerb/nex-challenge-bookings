@@ -1,0 +1,69 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Booking {
+  endDate: Date!
+  guest: User!
+  guests: Int!
+  id: String!
+  isAllInclusive: Boolean!
+  room: Room!
+  startDate: Date!
+  status: BookingStatus!
+  totalPrice: Float!
+}
+
+enum BookingStatus {
+  CANCELLED
+  CONFIRMED
+  PENDING
+}
+
+input CreateBookingInput {
+  endDate: Date!
+  guestId: String!
+  guests: Float!
+  isAllInclusive: Boolean!
+  roomId: String!
+  startDate: Date!
+  totalPrice: Float!
+}
+
+"""Date custom scalar type"""
+scalar Date
+
+type Mutation {
+  cancelBooking(id: String!): Boolean!
+  createBooking(input: CreateBookingInput!): Booking!
+}
+
+type Query {
+  getAllBookings: [Booking!]!
+  getBooking(id: String!): Booking
+}
+
+type Room {
+  capacity: Int!
+  id: String!
+  price: Float!
+  type: RoomType!
+  view: RoomView!
+}
+
+enum RoomType {
+  DOUBLE
+  PRESIDENTIAL
+  SINGLE
+}
+
+enum RoomView {
+  INTERIOR
+  OUTSIDE
+}
+
+type User {
+  email: String!
+  id: String!
+  name: String!
+}

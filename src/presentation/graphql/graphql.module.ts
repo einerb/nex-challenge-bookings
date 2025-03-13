@@ -8,7 +8,7 @@ import { DateScalar } from './scalars/date.scalar';
   imports: [
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
-      playground: true,
+      playground: false,
       autoSchemaFile: join(
         process.cwd(),
         'src/presentation/graphql/schema.gql',
