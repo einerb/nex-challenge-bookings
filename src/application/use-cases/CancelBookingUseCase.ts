@@ -1,3 +1,4 @@
+import { CustomError } from 'src/domain/exceptions/custom-error';
 import { BookingRepository } from 'src/domain/repositories/BookingRepository';
 
 export class CancelBookingUseCase {
@@ -7,7 +8,7 @@ export class CancelBookingUseCase {
     const booking = await this.bookingRepo.findById(id);
 
     if (!booking) {
-      throw new Error('Booking not found!');
+      throw new CustomError('Booking not found!', 'BOOKING_NOT_FOUND', 404);
     }
 
     await this.bookingRepo.delete(id);

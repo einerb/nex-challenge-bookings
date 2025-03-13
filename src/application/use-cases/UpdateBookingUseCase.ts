@@ -1,6 +1,7 @@
 import { Booking } from 'src/domain/entities';
 import { BookingRepository } from 'src/domain/repositories/BookingRepository';
 import { UpdateBookingDTO } from '../dtos/UpdateBookingDto';
+import { CustomError } from 'src/domain/exceptions/custom-error';
 
 export class UpdateBookingUseCase {
   constructor(private readonly bookingRepo: BookingRepository) {}
@@ -9,7 +10,7 @@ export class UpdateBookingUseCase {
     const existingBooking = await this.bookingRepo.findById(input.id);
 
     if (!existingBooking) {
-      throw new Error('Boooking not found!');
+      throw new CustomError('Booking not found!', 'BOOKING_NOT_FOUND', 404);
     }
 
     const updatedBooking = new Booking(

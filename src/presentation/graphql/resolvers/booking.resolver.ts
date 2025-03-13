@@ -13,6 +13,7 @@ import { RoomRepository } from 'src/domain/repositories/RoomRepository';
 import { UserRepository } from 'src/domain/repositories/UserRepository';
 import { CreateBookingDTO } from 'src/application/dtos/create-booking.dto';
 import { Room, User } from 'src/domain/entities';
+import { CustomError } from 'src/domain/exceptions/custom-error';
 
 @Resolver(() => Booking)
 export class BookingResolver {
@@ -40,8 +41,12 @@ export class BookingResolver {
     const room: Room | null = await this.roomRepo.findById(input.roomId);
     const guest: User | null = await this.userRepo.findById(input.guestId);
 
-    if (!room || !guest) {
-      throw new Error('Room o Guest no encontrado');
+    if (!room) {
+      throw new CustomError('Room not found!', 'ROOM_NOT_FOUND', 404);
+    }
+
+    if (!guest) {
+      throw new CustomError('Guest not found!', 'GUEST_NOT_FOUND', 404);
     }
 
     const createBookingDto = new CreateBookingDTO(

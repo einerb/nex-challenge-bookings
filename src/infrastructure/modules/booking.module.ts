@@ -12,6 +12,8 @@ import { BookingPrismaRepository } from '../persistence/BookingPrismaRepository'
 import { RoomPrismaRepository } from '../persistence/RoomPrismaRepository';
 import { UserPrismaRepository } from '../persistence/UserPrismaRepository';
 import { PrismaModule } from '../prisma/prisma.module';
+import { APP_FILTER } from '@nestjs/core';
+import { CustomGqlExceptionFilter } from 'src/presentation/graphql/exceptions/custom-gql-exception.filter';
 
 @Module({
   imports: [PrismaModule],
@@ -33,6 +35,10 @@ import { PrismaModule } from '../prisma/prisma.module';
     {
       provide: 'UserRepository',
       useClass: UserPrismaRepository,
+    },
+    {
+      provide: APP_FILTER,
+      useClass: CustomGqlExceptionFilter,
     },
   ],
 })
