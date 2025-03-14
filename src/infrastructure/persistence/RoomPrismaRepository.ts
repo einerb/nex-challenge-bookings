@@ -13,8 +13,8 @@ export class RoomPrismaRepository implements RoomRepository {
     checkIn: Date,
     checkOut: Date,
     guests: number,
-    type?: RoomType,
-    view?: RoomView,
+    type: RoomType = RoomType.SINGLE,
+    view: RoomView = RoomView.INTERIOR,
   ): Promise<Room[]> {
     const rooms = await this.prisma.room.findMany({
       where: {
@@ -27,6 +27,7 @@ export class RoomPrismaRepository implements RoomRepository {
         type,
         view,
       },
+      include: { bookings: true },
     });
 
     return rooms.map((room) => this.mapToDomain(room));

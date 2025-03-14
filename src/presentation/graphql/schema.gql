@@ -38,6 +38,14 @@ input CreateBookingInput {
 """Date custom scalar type"""
 scalar Date
 
+input FindAvailableInput {
+  checkIn: Date!
+  checkOut: Date!
+  guest: Float!
+  type: RoomType
+  view: RoomView
+}
+
 type Mutation {
   cancelBooking(id: String!): Boolean!
   createBooking(input: CreateBookingInput!): Booking!
@@ -45,6 +53,8 @@ type Mutation {
 
 type Query {
   getAllBookings: [Booking!]!
+  getAllRooms(input: FindAvailableInput!): [Room!]!
+  getAllUsers: [User!]!
   getBooking(id: String!): Booking
 }
 

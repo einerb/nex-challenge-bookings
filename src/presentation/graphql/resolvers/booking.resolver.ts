@@ -14,7 +14,7 @@ import {
   CreateBookingUseCase,
   GetAllBookingsUseCase,
   GetBookingUseCase,
-} from '../../../application/use-cases';
+} from '../../../application/use-cases/booking';
 
 @Resolver('Booking')
 export class BookingResolver {

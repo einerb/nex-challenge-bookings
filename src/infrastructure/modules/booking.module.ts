@@ -12,7 +12,7 @@ import {
   GetAllBookingsUseCase,
   GetBookingUseCase,
   UpdateBookingUseCase,
-} from 'src/application/use-cases';
+} from '../../application/use-cases/booking';
 import { configureContainer } from '../containers/configure-container';
 import { BookingPrismaRepository } from '../persistence/BookingPrismaRepository';
 

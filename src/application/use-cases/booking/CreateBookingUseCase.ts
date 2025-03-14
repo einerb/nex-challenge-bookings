@@ -1,8 +1,8 @@
-import { Booking, BookingStatus } from '../../domain/entities';
-import { BookingRepository } from '../../domain/repositories/BookingRepository';
-import { CreateBookingDTO } from '../dtos/Create-booking.dto';
-import { CustomError } from '../../domain/exceptions/custom-error';
-import { BookingService } from '../../domain/services/BookingService';
+import { Booking, BookingStatus } from '../../../domain/entities';
+import { BookingRepository } from '../../../domain/repositories/BookingRepository';
+import { CreateBookingDTO } from '../../dtos/Create-booking.dto';
+import { CustomError } from '../../../domain/exceptions/custom-error';
+import { BookingService } from '../../../domain/services/BookingService';
 
 export class CreateBookingUseCase {
   constructor(

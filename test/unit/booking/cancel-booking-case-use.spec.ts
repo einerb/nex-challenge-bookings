@@ -1,4 +1,4 @@
-import { CancelBookingUseCase } from '../../../src/application/use-cases';
+import { CancelBookingUseCase } from '../../../src/application/use-cases/booking';
 
 import {
   Booking,

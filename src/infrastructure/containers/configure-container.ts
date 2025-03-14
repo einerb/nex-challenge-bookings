@@ -6,12 +6,16 @@ import {
   CreateBookingUseCase,
   GetAllBookingsUseCase,
   GetBookingUseCase,
-} from '../../application/use-cases';
+} from '../../application/use-cases/booking';
 import { PrismaService } from '../prisma/prisma.service';
 import { PricingService } from '../../domain/services/PricingService';
 import { DiscountService } from '../../domain/services/DiscountService';
 import { PricingRulePrismaRepository } from '../persistence/PricingRulePrismaRepository';
 import { DiscountRulePrismaRepository } from '../persistence/DiscountRulePrismaRepository';
+import { GetAllRoomsUseCase } from '../../application/use-cases/room/GetAllRoomsUseCase';
+import { RoomPrismaRepository } from '../persistence/RoomPrismaRepository';
+import { UserPrismaRepository } from '../persistence/UserPrismaRepository';
+import { GetAllUsersUseCase } from '../../application/use-cases/user/GetAllUsersUseCase';
 
 export function configureContainer(): Container {
   const container = new Container();
@@ -29,10 +33,13 @@ export function configureContainer(): Container {
   container.register('PricingService', pricingService);
   container.register('DiscountService', discountService);
   container.register('BookingService', bookingService);
+
   container.register(
     'BookingRepository',
     new BookingPrismaRepository(prismaService),
   );
+  container.register('RoomRepository', new RoomPrismaRepository(prismaService));
+  container.register('UserRepository', new UserPrismaRepository(prismaService));
 
   container.register(
     'CreateBookingUseCase',
@@ -52,6 +59,14 @@ export function configureContainer(): Container {
   container.register(
     'CancelBookingUseCase',
     new CancelBookingUseCase(container.resolve('BookingRepository')),
+  );
+  container.register(
+    'GetAllRoomsUseCase',
+    new GetAllRoomsUseCase(container.resolve('RoomRepository')),
+  );
+  container.register(
+    'GetAllUsersUseCase',
+    new GetAllUsersUseCase(container.resolve('UserRepository')),
   );
 
   return container;

@@ -1,7 +1,7 @@
-import { Booking } from '../../domain/entities';
-import { BookingRepository } from '../../domain/repositories/BookingRepository';
-import { UpdateBookingDTO } from '../dtos/UpdateBookingDto';
-import { CustomError } from '../../domain/exceptions/custom-error';
+import { Booking } from '../../../domain/entities';
+import { BookingRepository } from '../../../domain/repositories/BookingRepository';
+import { UpdateBookingDTO } from '../../dtos/UpdateBookingDto';
+import { CustomError } from '../../../domain/exceptions/custom-error';
 
 export class UpdateBookingUseCase {
   constructor(private readonly bookingRepo: BookingRepository) {}

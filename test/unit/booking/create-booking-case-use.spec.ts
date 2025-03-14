@@ -1,4 +1,4 @@
-import { CreateBookingUseCase } from '../../../src/application/use-cases';
+import { CreateBookingUseCase } from '../../../src/application/use-cases/booking';
 import { Booking, BookingStatus } from '../../../src/domain/entities';
 import { CustomError } from '../../../src/domain/exceptions/custom-error';
 import { BookingRepository } from '../../../src/domain/repositories/BookingRepository';

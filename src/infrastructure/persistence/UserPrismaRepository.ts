@@ -23,13 +23,12 @@ export class UserPrismaRepository implements UserRepository {
     return user ? this.mapToDomain(user) : null;
   }
 
-  async findByEmail(email: string): Promise<User | null> {
-    const user = (await this.prisma.user.findUnique({
-      where: { email },
+  async findAll(): Promise<User[]> {
+    const users = await this.prisma.user.findMany({
       include: { bookings: true },
-    })) as PrismaUser;
+    });
 
-    return user ? this.mapToDomain(user) : null;
+    return users.map((user) => this.mapToDomain(user));
   }
 
   private mapToDomain(user: PrismaUser): User {
