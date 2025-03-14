@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
 import { PrismaService } from '../prisma/prisma.service';
-import { UserRepository } from 'src/domain/repositories/UserRepository';
-import { User } from 'src/domain/entities';
+import { UserRepository } from '../../domain/repositories/UserRepository';
+import { User } from '../../domain/entities';
 
 interface PrismaUser {
   id: string;

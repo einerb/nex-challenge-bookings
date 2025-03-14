@@ -1,8 +1,8 @@
 import { Injectable } from '@nestjs/common';
 
 import { PrismaService } from '../prisma/prisma.service';
-import { DiscountRuleRepository } from 'src/domain/repositories/DiscountRuleRepository';
-import { DiscountRule } from 'src/domain/entities/DiscountRule';
+import { DiscountRuleRepository } from '../../domain/repositories/DiscountRuleRepository';
+import { DiscountRule } from '../../domain/entities/DiscountRule';
 
 @Injectable()
 export class DiscountRulePrismaRepository implements DiscountRuleRepository {

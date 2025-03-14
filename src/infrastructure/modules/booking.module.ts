@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
 import { APP_FILTER } from '@nestjs/core';
 
-import { BookingResolver } from 'src/presentation/graphql/resolvers/booking.resolver';
+import { BookingResolver } from '../../presentation/graphql/resolvers/booking.resolver';
 import { PrismaModule } from '../prisma/prisma.module';
-import { CustomGqlExceptionFilter } from 'src/presentation/graphql/exceptions/custom-gql-exception.filter';
+import { CustomGqlExceptionFilter } from '../../presentation/graphql/exceptions/custom-gql-exception.filter';
 import { RoomPrismaRepository } from '../persistence/RoomPrismaRepository';
 import { UserPrismaRepository } from '../persistence/UserPrismaRepository';
 import {

@@ -6,9 +6,9 @@ import {
 import { Injectable } from '@nestjs/common';
 
 import { PrismaService } from '../prisma/prisma.service';
-import { BookingRepository } from 'src/domain/repositories/BookingRepository';
-import { Booking, BookingStatus } from 'src/domain/entities/Booking';
-import { Room, User } from 'src/domain/entities/';
+import { BookingRepository } from '../../domain/repositories/BookingRepository';
+import { Booking, BookingStatus } from '../../domain/entities/Booking';
+import { Room, User } from '../../domain/entities/';
 
 @Injectable()
 export class BookingPrismaRepository implements BookingRepository {

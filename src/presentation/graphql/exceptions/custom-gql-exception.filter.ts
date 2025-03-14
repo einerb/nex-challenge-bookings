@@ -2,7 +2,7 @@ import { Catch } from '@nestjs/common';
 import { GqlExceptionFilter } from '@nestjs/graphql';
 import { GraphQLError } from 'graphql';
 
-import { CustomError } from 'src/domain/exceptions/custom-error';
+import { CustomError } from '../../../domain/exceptions/custom-error';
 
 @Catch()
 export class CustomGqlExceptionFilter implements GqlExceptionFilter {

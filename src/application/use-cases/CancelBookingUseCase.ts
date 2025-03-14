@@ -1,5 +1,5 @@
-import { CustomError } from 'src/domain/exceptions/custom-error';
-import { BookingRepository } from 'src/domain/repositories/BookingRepository';
+import { CustomError } from '../../domain/exceptions/custom-error';
+import { BookingRepository } from '../../domain/repositories/BookingRepository';
 
 export class CancelBookingUseCase {
   constructor(private readonly bookingRepo: BookingRepository) {}

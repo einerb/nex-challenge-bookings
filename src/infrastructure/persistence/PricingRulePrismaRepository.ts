@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 
 import { PrismaService } from '../prisma/prisma.service';
-import { PricingRuleRepository } from 'src/domain/repositories/PricingRuleRepository';
-import { PricingRule } from 'src/domain/entities/PricingRule';
-import { RoomType } from 'src/domain/entities/Room';
+import { PricingRuleRepository } from '../../domain/repositories/PricingRuleRepository';
+import { PricingRule } from '../../domain/entities/PricingRule';
+import { RoomType } from '../../domain/entities/Room';
 
 @Injectable()
 export class PricingRulePrismaRepository implements PricingRuleRepository {

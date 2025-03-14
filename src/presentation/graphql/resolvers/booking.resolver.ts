@@ -3,18 +3,18 @@ import { Inject } from '@nestjs/common';
 
 import { Booking } from '../types/booking.type';
 import { CreateBookingInput } from '../inputs/create-booking.input';
-import { RoomRepository } from 'src/domain/repositories/RoomRepository';
-import { UserRepository } from 'src/domain/repositories/UserRepository';
-import { CreateBookingDTO } from 'src/application/dtos/Create-booking.dto';
-import { Room, User } from 'src/domain/entities';
-import { CustomError } from 'src/domain/exceptions/custom-error';
-import { Container } from 'src/infrastructure/containers/container';
+import { RoomRepository } from '../../../domain/repositories/RoomRepository';
+import { UserRepository } from '../../../domain/repositories/UserRepository';
+import { CreateBookingDTO } from '../../../application/dtos/Create-booking.dto';
+import { Room, User } from '../../../domain/entities';
+import { CustomError } from '../../../domain/exceptions/custom-error';
+import { Container } from '../../../infrastructure/containers/container';
 import {
   CancelBookingUseCase,
   CreateBookingUseCase,
   GetAllBookingsUseCase,
   GetBookingUseCase,
-} from 'src/application/use-cases';
+} from '../../../application/use-cases';
 
 @Resolver('Booking')
 export class BookingResolver {
