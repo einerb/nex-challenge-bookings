@@ -39,8 +39,6 @@ export class PricingService {
     const pricing = await this.getPricingRule(roomType);
     const weekendPrice = pricing.calculateWeekendPrice();
 
-    console.log({ pricing, weekendPrice });
-
     return weekendPrice * weekendNights;
   }
 

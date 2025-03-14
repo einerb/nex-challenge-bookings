@@ -19,7 +19,7 @@ export class CreateBookingUseCase {
 
     if (guests > room.capacity) {
       throw new CustomError(
-        `The ${room.type} room cannot accommodate ${guests} people. Maximum capacity: ${room.capacity}!`,
+        'Room capacity is less than the actual amount!',
         'ROOM_CAPACITY_EXCEEDED',
         400,
       );
