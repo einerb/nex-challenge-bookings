@@ -1,10 +1,10 @@
-# fly.toml app configuration file generated for nex-challenge-bookings on 2025-03-14T15:03:17Z
+# fly.toml app configuration file generated for nex-challenge-bookings on 2025-03-14T15:36:29Z
 #
 # See https://fly.io/docs/reference/configuration/ for information about how to use this file.
 #
 
 app = 'nex-challenge-bookings'
-primary_region = 'ams'
+primary_region = 'iad'
 
 [build]
 
