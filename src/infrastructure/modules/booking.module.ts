@@ -1,19 +1,20 @@
 import { Module } from '@nestjs/common';
+import { APP_FILTER } from '@nestjs/core';
 
-import {
-  CreateBookingUseCase,
-  GetBookingUseCase,
-  GetAllBookingsUseCase,
-  UpdateBookingUseCase,
-  CancelBookingUseCase,
-} from 'src/application/use-cases';
 import { BookingResolver } from 'src/presentation/graphql/resolvers/booking.resolver';
-import { BookingPrismaRepository } from '../persistence/BookingPrismaRepository';
+import { PrismaModule } from '../prisma/prisma.module';
+import { CustomGqlExceptionFilter } from 'src/presentation/graphql/exceptions/custom-gql-exception.filter';
 import { RoomPrismaRepository } from '../persistence/RoomPrismaRepository';
 import { UserPrismaRepository } from '../persistence/UserPrismaRepository';
-import { PrismaModule } from '../prisma/prisma.module';
-import { APP_FILTER } from '@nestjs/core';
-import { CustomGqlExceptionFilter } from 'src/presentation/graphql/exceptions/custom-gql-exception.filter';
+import {
+  CancelBookingUseCase,
+  CreateBookingUseCase,
+  GetAllBookingsUseCase,
+  GetBookingUseCase,
+  UpdateBookingUseCase,
+} from 'src/application/use-cases';
+import { configureContainer } from '../containers/configure-container';
+import { BookingPrismaRepository } from '../persistence/BookingPrismaRepository';
 
 @Module({
   imports: [PrismaModule],
@@ -24,6 +25,12 @@ import { CustomGqlExceptionFilter } from 'src/presentation/graphql/exceptions/cu
     GetAllBookingsUseCase,
     UpdateBookingUseCase,
     CancelBookingUseCase,
+    {
+      provide: 'Container',
+      useFactory: () => {
+        return configureContainer();
+      },
+    },
     {
       provide: 'BookingRepository',
       useClass: BookingPrismaRepository,

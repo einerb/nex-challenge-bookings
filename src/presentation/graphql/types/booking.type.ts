@@ -32,4 +32,22 @@ export class Booking {
 
   @Field(() => BookingStatus)
   status!: BookingStatus;
+
+  @Field(() => Float)
+  numberDays!: number;
+
+  @Field(() => Float)
+  numberNights!: number;
+
+  @Field(() => Float)
+  basePrice!: number;
+
+  @Field(() => Float)
+  totalWeekendIncrement!: number;
+
+  @Field(() => Float)
+  totalDiscount!: number;
+
+  @Field(() => Float)
+  totalAllInclusive!: number;
 }

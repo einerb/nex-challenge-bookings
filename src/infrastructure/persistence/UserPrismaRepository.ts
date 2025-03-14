@@ -5,6 +5,7 @@ import { UserRepository } from 'src/domain/repositories/UserRepository';
 import { User } from 'src/domain/entities';
 
 interface PrismaUser {
+  id: string;
   name: string;
   email: string;
 }
@@ -32,6 +33,6 @@ export class UserPrismaRepository implements UserRepository {
   }
 
   private mapToDomain(user: PrismaUser): User {
-    return new User(user.name, user.email);
+    return new User(user.id, user.name, user.email);
   }
 }

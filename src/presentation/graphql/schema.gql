@@ -3,15 +3,21 @@
 # ------------------------------------------------------
 
 type Booking {
+  basePrice: Float!
   endDate: Date!
   guest: User!
   guests: Int!
   id: String!
   isAllInclusive: Boolean!
+  numberDays: Float!
+  numberNights: Float!
   room: Room!
   startDate: Date!
   status: BookingStatus!
+  totalAllInclusive: Float!
+  totalDiscount: Float!
   totalPrice: Float!
+  totalWeekendIncrement: Float!
 }
 
 enum BookingStatus {
@@ -27,7 +33,6 @@ input CreateBookingInput {
   isAllInclusive: Boolean!
   roomId: String!
   startDate: Date!
-  totalPrice: Float!
 }
 
 """Date custom scalar type"""
@@ -46,6 +51,7 @@ type Query {
 type Room {
   capacity: Int!
   id: String!
+  name: String!
   price: Float!
   type: RoomType!
   view: RoomView!

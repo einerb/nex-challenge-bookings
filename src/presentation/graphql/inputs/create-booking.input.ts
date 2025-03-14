@@ -18,8 +18,5 @@ export class CreateBookingInput {
   guests!: number;
 
   @Field()
-  totalPrice!: number;
-
-  @Field()
   isAllInclusive!: boolean;
 }

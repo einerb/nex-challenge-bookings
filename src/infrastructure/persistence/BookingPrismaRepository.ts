@@ -32,6 +32,29 @@ export class BookingPrismaRepository implements BookingRepository {
     return bookings.map((booking) => this.mapToDomain(booking));
   }
 
+  async findOverlappingBookings(
+    roomId: string,
+    startDate: Date,
+    endDate: Date,
+  ): Promise<Booking[]> {
+    const overlappingBookings = await this.prisma.booking.findMany({
+      where: {
+        roomId,
+        status: BookingStatus.CONFIRMED,
+        deletedAt: null,
+        OR: [
+          {
+            startDate: { lt: endDate },
+            endDate: { gt: startDate },
+          },
+        ],
+      },
+      include: { room: true, guest: true },
+    });
+
+    return overlappingBookings.map((booking) => this.mapToDomain(booking));
+  }
+
   async save(booking: Booking): Promise<void> {
     await this.prisma.booking.create({ data: this.mapToPrisma(booking) });
   }
@@ -46,7 +69,7 @@ export class BookingPrismaRepository implements BookingRepository {
   async delete(id: string): Promise<void> {
     await this.prisma.booking.update({
       where: { id },
-      data: { deletedAt: new Date() },
+      data: { status: BookingStatus.CANCELLED },
     });
   }
 
@@ -54,6 +77,7 @@ export class BookingPrismaRepository implements BookingRepository {
     booking: PrismaBooking & { room: PrismaRoom; guest: PrismaUser },
   ): Booking {
     return new Booking(
+      booking.id,
       booking.room as Room,
       booking.guest as User,
       booking.startDate,
@@ -62,6 +86,12 @@ export class BookingPrismaRepository implements BookingRepository {
       booking.isAllInclusive,
       booking.guests,
       booking.status as BookingStatus,
+      booking.numberDays,
+      booking.numberNights,
+      booking.basePrice,
+      booking.totalWeekendIncrement,
+      booking.totalDiscount,
+      booking.totalAllInclusive,
     );
   }
 
@@ -76,6 +106,12 @@ export class BookingPrismaRepository implements BookingRepository {
       isAllInclusive: booking.isAllInclusive,
       guests: booking.guests,
       status: booking.status,
+      numberDays: booking.numberDays ?? 0,
+      numberNights: booking.numberNights ?? 0,
+      basePrice: booking.basePrice ?? 0,
+      totalWeekendIncrement: booking.totalWeekendIncrement ?? 0,
+      totalDiscount: booking.totalDiscount ?? 0,
+      totalAllInclusive: booking.totalAllInclusive ?? 0,
       createdAt: booking.createdAt,
       updatedAt: booking.updatedAt,
       deletedAt: booking.deletedAt,

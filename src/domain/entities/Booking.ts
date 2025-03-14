@@ -14,12 +14,12 @@ export class Booking extends BaseEntity {
     public readonly guests: number,
     public readonly status: BookingStatus,
 
-    public readonly numberDays: number,
-    public readonly numberNights: number,
-    public readonly basePrice: number,
-    public readonly totalWeekendIncrement: number,
-    public readonly totalDiscount: number,
-    public readonly totalAllInclusive: number,
+    public readonly numberDays?: number,
+    public readonly numberNights?: number,
+    public readonly basePrice?: number,
+    public readonly totalWeekendIncrement?: number,
+    public readonly totalDiscount?: number,
+    public readonly totalAllInclusive?: number,
   ) {
     super(id);
   }

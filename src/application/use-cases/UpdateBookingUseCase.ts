@@ -14,6 +14,7 @@ export class UpdateBookingUseCase {
     }
 
     const updatedBooking = new Booking(
+      input.id,
       input.room ?? existingBooking.room,
       input.guest ?? existingBooking.guest,
       input.startDate ?? existingBooking.startDate,

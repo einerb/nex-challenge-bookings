@@ -40,6 +40,8 @@ export class RoomPrismaRepository implements RoomRepository {
 
   private mapToDomain(room: PrismaRoom): Room {
     return new Room(
+      room.id,
+      room.name,
       room.type as RoomType,
       room.view as RoomView,
       room.price,

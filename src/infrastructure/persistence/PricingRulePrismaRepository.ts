@@ -16,6 +16,7 @@ export class PricingRulePrismaRepository implements PricingRuleRepository {
 
     return rule
       ? new PricingRule(
+          rule.id,
           rule.roomType as RoomType,
           rule.basePrice,
           rule.weekendIncrement,

@@ -14,7 +14,7 @@ export class DiscountRulePrismaRepository implements DiscountRuleRepository {
     });
 
     return rule
-      ? new DiscountRule(rule.minNights, rule.maxNights, rule.discount)
+      ? new DiscountRule(rule.id, rule.minNights, rule.maxNights, rule.discount)
       : null;
   }
 }
