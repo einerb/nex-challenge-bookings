@@ -1,37 +1,32 @@
 services:
   app:
     build: .
-    container_name: nex-booking
+    container_name: nex_booking
     ports:
       - "3000:3000"
-    env_file:
-      - .env
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: "postgresql://postgres:neutro123*@postgresdb:5432/nex_booking_db"
+      PORT: 3000
     volumes:
       - .:/app
       - /app/node_modules
     depends_on:
-      db:
-        condition: service_healthy
-      redis:
-        condition: service_started
-    command: [ "npm", "start" ]
+      - postgresdb
+    restart: always
 
-  db:
+  postgresdb:
     image: postgres:16
-    container_name: nex-booking-db
+    container_name: nex_booking_db
     environment:
-      POSTGRES_DB: ${POSTGRES_DB?err}
-      POSTGRES_USER: ${POSTGRES_USER?err}
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD?err}
+      POSTGRES_DB: nex_booking_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: neutro123*
     ports:
-      - "5432:5432"
+      - "5439:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-    healthcheck:
-      test: [ "CMD", "pg_isready", "-U", "${POSTGRES_USER?err}" ]
-      interval: 10s
-      timeout: 5s
-      retries: 5
+    restart: always
 
 volumes:
   postgres_data:

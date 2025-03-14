@@ -1,14 +1,30 @@
-FROM node:20-alpine
+FROM node:22-alpine AS builder
 
-COPY --from=builder /app/package.json /app/yarn.lock ./
+WORKDIR /app
 
-RUN yarn install --production --frozen-lockfile
+COPY package.json yarn.lock* ./
 
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/prisma ./prisma
+RUN yarn cache clean && yarn install
+
+COPY prisma ./prisma
+
+RUN ls -la prisma/ && cat prisma/schema.prisma
 
 RUN npx prisma generate
 
+COPY . .
+
+RUN yarn build
+
+FROM node:22-alpine
+
+WORKDIR /app
+
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/prisma ./prisma
+COPY --from=builder /app/package.json ./
+
 EXPOSE 3000
 
-CMD ["node", "dist/main"]
+CMD ["yarn", "start:prod"]
